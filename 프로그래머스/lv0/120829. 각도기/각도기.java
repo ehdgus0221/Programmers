@@ -16,3 +16,6 @@ class Solution {
         return answer;
     }
 }
+
+// 삼항연산자로 계산하는 경우 
+//return angle == 180 ? 4 : angle < 90 ? 1 : angle == 90 ? 2 : angle > 90 ? 3 : 0;
