@@ -27,14 +27,14 @@ class Solution {
         }      
         
         // 일치하는 숫자가 없을 경우
-        // if ("".equals(sb.toString())) {
         if (inconsistency == true) {
             answer = "-1";
         }
         // 공통 정수가 0으로만 존재하는 경우 (첫번째 원소가 0)
         else if("0".equals(sb.toString().substring(0,1))) {
             answer = "0";
-        }            
+        }
+        // 반복문을 통해 얻은 결과 저장
         else {
             answer = sb.toString();
         }
