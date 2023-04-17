@@ -1,22 +1,24 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args)  {
-       Scanner sc = new Scanner(System.in);
-       int inputNum = sc.nextInt();
-       sc.nextLine();
-       int[] nums = new int[inputNum];
-       String num = sc.nextLine();
-       for(int i = 0; i < inputNum; i++) {
-           nums[i] = Integer.parseInt(num.split(" ")[i]);
-       }
-       int findNum = sc.nextInt();
-       int cnt = 0;
-       for (int i = 0; i < inputNum; i++) {
-           if (nums[i] == findNum) {
-               cnt++;
-           }
-       }
+        HashMap<Integer, Integer> hm = new HashMap<>();
+
+        Scanner sc = new Scanner(System.in);
+        int inputNum = sc.nextInt();
+        sc.nextLine();
+        String nums = sc.nextLine();
+        int findNum = sc.nextInt();
+        int cnt = 0;
+
+        for (int i = 0; i < inputNum; i++) {
+            hm.put(i, Integer.parseInt(nums.split(" ")[i]));
+            if(findNum == hm.get(i)) {
+                cnt++;
+            }
+        }
         System.out.println(cnt);
+
     }
 }
