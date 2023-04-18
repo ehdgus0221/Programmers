@@ -1,32 +1,48 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 class Solution {
-    public int solution(int[][] jobs) {
-        int size = jobs.length;
-        int totalTime = 0;
+public static int solution(int[][] jobs) {
 
-        Arrays.sort(jobs, (Comparator.comparingInt(o -> o[0])));
-        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o[1]));
+      Arrays.sort(jobs, new Comparator<int[]>() {
+          public int compare(int[] o1, int[] o2) {
+              if(o1[0] <= o2[0]){
+                  return -1;
+              }
+              return 1;
+          }
+      });      
 
-        int i = 0;
-        int curTime = 0;
-        while (size > 0) {
-            while (i < jobs.length && jobs[i][0] <= curTime) {
-                queue.offer(jobs[i++]);
-            }
+      PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
+          public int compare(int[] o1, int[] o2) {
+              if(o1[1] < o2[1]){
+                  return -1;
+              }
+              return 1;
+          }
+      });
 
-            if (queue.isEmpty()) {
-                curTime = jobs[i][0];
-            } else {
-                int[] request = queue.poll();
-                totalTime += curTime - request[0] + request[1];
-                curTime += request[1];
-                size--;
-            }
+      int time = 0;
+      int index = 0;
+      float answer = 0;
 
-        }
-        return (int) Math.floor(totalTime/jobs.length);
+      while(true){
+          while(index < jobs.length && jobs[index][0] <= time){
+              queue.offer(jobs[index]);
+              index ++;
+          }
+          if(queue.size() == 0){
+              time = jobs[index][0];
+              continue;
+          }
+          int[] job = queue.poll();
+          time += job[1];
+          answer += time - job[0];
+          if(index == jobs.length && queue.size() == 0){
+              break;
+          }
+      }
+
+      answer /= jobs.length;
+      return (int)answer;
     }
 }
