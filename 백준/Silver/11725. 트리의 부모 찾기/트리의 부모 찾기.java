@@ -1,59 +1,49 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int n ;
-    static ArrayList<Integer>[] list;
-    static int[] parents;
-    static boolean[] check;
+    static int N;
+    static int[] parent;
+    static boolean[] isVisit;
+    static StringTokenizer st;
+    static ArrayList<Integer> list[];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        N = Integer.parseInt(br.readLine());
+        isVisit = new boolean[N + 1];
+        list = new ArrayList[N + 1];
+        parent = new int[N + 1];
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-
-        list = new ArrayList[n+1];
-        parents = new int[n+1];
-        check = new boolean[n+1];
-
-        for (int i = 1; i <= n; i++) {
-            list[i] = new ArrayList<Integer>();
+        for (int i = 0; i < N + 1; i++) {
+            list[i] = new ArrayList<>();
         }
-        for (int j = 1; j <n ; j++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
 
+        for (int i = 0; i < N - 1; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            
             list[a].add(b);
             list[b].add(a);
         }
-
-        for (int k = 1; k <=n ; k++) {
-            if(!check[k]){
-                dfs(k);
+        
+        dfs(1);
+        
+        for (int i = 2; i < parent.length; i++) {
+            System.out.println(parent[i]);
+        }
+    }
+    
+    public static void dfs (int index) {
+        isVisit[index] = true;
+        for (int i : list[index]) {
+            if (!isVisit[i]) {
+                if (!isVisit[i]) {
+                    parent[i] = index;
+                    dfs(i);
+                }
             }
         }
-        for (int i = 2; i <=n ; i++) {
-            System.out.println(parents[i]);
-        }
-
     }
-
-    private static void dfs(int v){
-        if(check[v]){
-            return;
-        }
-        check[v] =true;
-        for (int vv: list[v]) {
-            if(!check[vv]){
-                parents[vv] = v;
-                dfs(vv);
-            }
-
-        }
-
-    }
-
 }
