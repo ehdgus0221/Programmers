@@ -1,3 +1,4 @@
+// 가져올 수 있는 값 중 큰 값을 dp에 저장
 class Solution {
     public int solution(int[][] triangle) {
         int answer = 0;
@@ -13,7 +14,7 @@ class Solution {
                 for (int j = 1; j < i; j++) {
                      dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - 1]) + triangle[i][j]; // 양쪽중 큰 값과 이전값의 합
                     }
-                    // 맨 오른쪽줄의 합
+            // 맨 오른쪽줄의 합
             dp[i][i] = dp[i - 1][i - 1] + triangle[i][i];        
             }
 
