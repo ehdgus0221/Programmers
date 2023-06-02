@@ -1,32 +1,35 @@
+import java.util.*;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] st = s.split("");
+        ArrayList<Character> a = new ArrayList<>();
+        
         int idx = 0;
         
-        //1.입력받는 문자열 길이만큼 반복
-        for(int i=0; i<st.length; i++){
-        	//1-1.공백이 나오면 인데스값 초기화해서 단어 별로 처리
-            if(st[i].equals(" ")){
-                idx=0;
-            }
-            //1-2.짝수 인데스일 경우
-            else if(idx %2 == 0){
-            	//대문자로 변환
-                st[i] = st[i].toUpperCase();
-                //다음 인덱스로 넘어가기
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ' && idx % 2 == 0) {       // 공백이 아니면서 짝수 인덱스에 존재하는 경우
+                if (s.charAt(i) >= 97 && s.charAt(i) <= 122) {   // 짝수 인덱스 && 소문자
+                a.add((char)(s.charAt(i) - 32));    
+                } else {                                        // 짝수 인덱스 && 이미 대문자인 경우
+                    a.add(s.charAt(i));
+                }
                 idx++;
-            }
-            //1-3.
-            else{//홀수 인덱스일 경우
-            	//소문자로 변환
-                st[i] = st[i].toLowerCase();
-                //다음 인덱스로 넘어가기
+            } else if (s.charAt(i) != ' ') {     // 공백이 아니면서 홀수 인덱스에 존재하는 경우
+                if (s.charAt(i) >= 65 && s.charAt(i) <= 90) {  // 홀수 인덱스 && 대문자
+                a.add((char)(s.charAt(i) + 32));
+                } else {                                        
+                    a.add(s.charAt(i));                         
+                }
                 idx++;
+            } else {                            // 공백인 경우
+                a.add(s.charAt(i));
+                idx = 0;
             }
-            //1-4.바꾼 값을 answer에 하나씩 더하기
-            answer += st[i];
-        }    
+            
+            answer += a.get(i);
+        }
+ 
         
         return answer;
     }
