@@ -13,11 +13,9 @@ class Solution {
             } else if (cardIdx2 < cardIdx2Max && curStr.equals(cards2[cardIdx2])) {
                 cardIdx2++;
             } else {
-                answer += "No";
-                return answer;
+                return "No";
             }
         }
-        answer += "Yes";
-        return answer;
+        return "Yes";
     }
 }
