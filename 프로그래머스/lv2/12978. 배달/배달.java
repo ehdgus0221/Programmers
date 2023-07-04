@@ -6,7 +6,7 @@ class Solution {
     
     private static void dijkstra() {
         PriorityQueue<Edge> queue = new PriorityQueue<>();
-        queue.add(new Edge(1, 0));
+        queue.add(new Edge(1, 0));  // 1에서 1로 가는 경우니깐 0
         
         while (!queue.isEmpty()) {
             Edge edge = queue.poll();
