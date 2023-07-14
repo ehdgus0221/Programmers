@@ -7,11 +7,11 @@ class Solution {
     private static int TOTAL_SALES = 0;
 
     public int[] solution(int[][] users, int[] emoticons) {
-        getPrices(emoticons, users, 0, new int[emoticons.length]);
+        dfs(emoticons, users, 0, new int[emoticons.length]);
         return new int[]{EMOTICON_PLUS, TOTAL_SALES};
     }
 
-    private void getPrices(int[] emoticons, int[][] users, int cur, int[] rates) {
+    private void dfs(int[] emoticons, int[][] users, int cur, int[] rates) {
         if (cur == emoticons.length) {
             updateAnswer(emoticons, users, rates);
             return;
@@ -19,7 +19,7 @@ class Solution {
 
         for (int rate : RATE) {
             rates[cur] = rate;
-            getPrices(emoticons, users, cur + 1, rates);
+            dfs(emoticons, users, cur + 1, rates);
         }
     }
 
